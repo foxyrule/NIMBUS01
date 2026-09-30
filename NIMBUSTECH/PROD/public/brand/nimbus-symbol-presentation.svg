@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Nimbus Technologies &amp; Services symbol</title>
+  <desc id="desc">A centered abstract geometric relay mark on a clean neutral background.</desc>
+  <rect width="512" height="512" fill="#F3F5F7" />
+  <g transform="translate(128 128) scale(2)">
+    <g fill="none" stroke="#14263F" stroke-width="10" stroke-linecap="square" stroke-linejoin="round">
+      <path d="M22 50V30c0-4.4 3.6-8 8-8h20l14 14v11" />
+      <path d="M78 22h20c4.4 0 8 3.6 8 8v20L92 64H81" />
+      <path d="M106 78v20c0 4.4-3.6 8-8 8H78L64 92V81" />
+      <path d="M50 106H30c-4.4 0-8-3.6-8-8V78l14-14h11" />
+    </g>
+    <path d="M98 22c4.4 0 8 3.6 8 8v20" fill="none" stroke="#13AFC9" stroke-width="10" stroke-linecap="square" stroke-linejoin="round" />
+    <path d="m64 49 15 15-15 15-15-15 15-15Z" fill="#14263F" />
+    <path d="m64 57 7 7-7 7-7-7 7-7Z" fill="#13AFC9" />
+  </g>
+</svg>
