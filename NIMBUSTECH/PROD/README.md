@@ -11,7 +11,7 @@ The Nimbus website is a responsive corporate site for Nimbus Technologies & Serv
 - **ESLint 9.30.1** and `eslint-config-next` provide code-quality checks using the flat configuration in `eslint.config.mjs`.
 - **Node.js and npm** install dependencies and run the project scripts. Use a current Node.js version compatible with Next.js 16.
 
-There is no application database or backend API in this project. Contact actions use the published phone number and email address. The Resources page links to original Nimbus-hosted pages for the credited third-party articles.
+The site includes a server-side contact endpoint. Contact messages are validated and sent to both `foxyrule@gmail.com` and `contactus@nimbustechllc.com` through Resend. The Resources page links to original Nimbus-hosted pages for the credited third-party articles.
 
 ## Run Locally
 
@@ -28,6 +28,8 @@ npm run dev
 ```
 
 Open the URL printed by Next.js, usually `http://localhost:3000`.
+
+To enable contact-form delivery, copy `.env.example` to `.env.local`, set `RESEND_API_KEY`, and set `CONTACT_FROM_EMAIL` to a sender address verified with Resend. The sender address is used only by the server; never expose the API key in client-side code.
 
 Available verification and production commands:
 
@@ -52,7 +54,7 @@ npm start
 | `/services/real-estate` | Real estate services. |
 | `/services/sports-talent` | Fantasy sports and talent scouting. |
 | `/resources` | Service resources and attributed original article links. |
-| `/contact` | Verified company contact details and phone/email actions. |
+| `/contact` | Contact form with a 400-character message limit and email contact link. |
 | `/contact-us` | Permanent redirect to `/contact`, retaining compatibility with the original Nimbus URL. |
 
 ## How the App Is Organized
@@ -61,13 +63,15 @@ Next.js App Router maps folders under `app/` to public routes. A `page.tsx` file
 
 Reusable UI and layout components live in `components/`:
 
-- `components/layout/Header.tsx` renders the desktop header, brand symbol, and primary links.
+- `components/layout/Header.tsx` renders the desktop header, brand symbol, primary links, and contact CTA.
 - `components/layout/MobileNavigation.tsx` provides the collapsible small-screen navigation.
 - `components/layout/Footer.tsx` renders company details and site navigation.
 - `components/ui/HeroRotator.tsx` rotates among five service highlights, with timed progression, manual controls, and links to the corresponding service pages.
 - `components/ui/ServiceCard.tsx` and `SectionHeading.tsx` keep common page elements consistent.
 
-`lib/site.ts` is the shared source for company contact details and the primary navigation. Update information there to keep header, footer, and contact surfaces consistent.
+`components/ui/ContactForm.tsx` provides client-side validation, the live character counter, and submission feedback. `app/api/contact/route.ts` validates submissions on the server and sends them to both required email recipients through Resend.
+
+`lib/site.ts` is the shared source for the approved company email and primary navigation. The retired phone number and street address are not used by the site.
 
 ## Brand and Image Assets
 

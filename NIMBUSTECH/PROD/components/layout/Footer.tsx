@@ -1,43 +1,31 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { company, primaryNav } from '@/lib/site';
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden border-t border-slate-700 bg-slate-950 text-slate-200">
-      <div className="absolute inset-0 -z-20 bg-black 200 bg-cover bg-center" />
-      <div className="absolute inset-0 -z-10 bg-slate-950/90" />
-
-      <div className="container-shell grid gap-8 py-14 lg:grid-cols-[1.4fr_1fr_1fr]">
-
-        {/* Company */}
+    <footer className="border-t border-slate-700 bg-[#0b1220] text-slate-200">
+      <div className="container-shell grid gap-9 py-12 md:grid-cols-[1.3fr_0.8fr_0.9fr]">
         <div>
-          <h2 className="text-lg font-semibold text-white">
-            {company.name}
-          </h2>
+          <Link href="/" className="inline-flex items-center gap-3" aria-label="Nimbus home">
+            <Image src="/brand/nimbus-symbol-white.svg" alt="" width={38} height={38} />
+            <span className="text-sm font-semibold text-white">{company.name}</span>
+          </Link>
 
-          <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
+          <p className="mt-4 max-w-md text-sm leading-6 text-slate-300">
             Nimbus Technologies and Services LLC is a specialized consultancy services company with a focus on Managed IT Services, Healthcare Record Management System and Real Estate Services.
           </p>
 
-          <p className="mt-4 max-w-md whitespace-pre-line text-sm leading-7 text-slate-300">
-            {company.address}
-          </p>
-
-          <p className="mt-3 text-sm text-slate-300">
-            {company.phone}
-          </p>
-
           <a
-            href={`mailto:${company.email}`}
+            href="mailto:contactus@nimbustechllc.com"
             className="mt-2 inline-block text-sm text-slate-300 transition hover:text-white hover:underline underline-offset-4"
           >
             {company.email}
           </a>
         </div>
 
-        {/* Navigation */}
-        <div className="border-l-0 md:border-l border-white/10 md:pl-6">
+        <div className="border-white/15 md:border-l md:pl-7">
           <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-400">
             Navigation
           </h3>
@@ -47,7 +35,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-slate-300 transition hover:text-white hover:underline underline-offset-4"
+                  className="text-slate-300 transition hover:text-white hover:underline underline-offset-4 focus-visible:outline-white"
                 >
                   {item.label}
                 </Link>
@@ -56,8 +44,7 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Business Focus */}
-        <div className="border-l-0 md:border-l border-white/10 md:pl-6">
+        <div className="border-white/15 md:border-l md:pl-7">
           <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-400">
             Business focus
           </h3>
@@ -69,7 +56,9 @@ export function Footer() {
             <li>Fantasy Sports / Talent Scouting</li>
           </ul>
         </div>
-
+      </div>
+      <div className="border-t border-white/10">
+        <div className="container-shell py-4 text-xs text-slate-400">© {new Date().getFullYear()} {company.name}</div>
       </div>
     </footer>
   );

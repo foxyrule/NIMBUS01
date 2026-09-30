@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Managed IT Services',
+  description: 'Explore Nimbus managed IT support, Microsoft 365, electronic document management, strategic planning, maintenance, and cloud services.',
+};
 
 const pillars = [
   'Operational technology support for daily business continuity',
@@ -61,6 +67,7 @@ export default function ManagedItPage() {
         eyebrow="Managed IT Services"
         title="Dependable technology support for businesses that need steady operations."
         description="Nimbus focuses on keeping clients supported, connected, and prepared for day-to-day technology demands without overcomplicating the process."
+        level={1}
       />
 
       <div className="relative mt-10 aspect-[16/7] overflow-hidden bg-slate-900">
@@ -106,7 +113,7 @@ export default function ManagedItPage() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_14px_32px_rgba(15,23,42,0.05)]">
+      <div className="mt-16 border-t border-slate-200 py-8">
         <p className="section-kicker">Why it matters</p>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-700">
           Managed IT support is a core component of a resilient business operation. It helps organizations reduce friction, maintain continuity, and move forward with confidence in the systems that keep everyday work running.

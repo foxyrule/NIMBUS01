@@ -1,55 +1,33 @@
-import Link from 'next/link';
-
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ContactForm } from '@/components/ui/ContactForm';
 import { company } from '@/lib/site';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Contact Nimbus Technologies & Services LLC about managed IT, healthcare records, real estate, fantasy sports, or talent scouting.',
+};
 
 export default function ContactPage() {
   return (
     <div className="container-shell py-16">
       <SectionHeading
         eyebrow="Contact"
-        title="Let’s talk about your next business support need."
-        description="Nimbus works with organizations that need dependable execution across technology, records operations, real estate support, and specialized service programs."
+        title="Send us a message."
+        description="Tell Nimbus what you need help with. The team will follow up by email."
+        level={1}
       />
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="surface-card">
-          <p className="text-2xl font-semibold tracking-tight text-slate-950">{company.name}</p>
-          <div className="mt-6 space-y-5 text-slate-700">
-            <p className="whitespace-pre-line leading-7">{company.address}</p>
-            <p>
-              Phone:{' '}
-              <a href={`tel:${company.phone.replace(/[^\d+]/g, '')}`} className="font-medium text-brand-700 hover:text-brand-900">
-                {company.phone}
-              </a>
-            </p>
-            <p>
-              Email:{' '}
-              <a href={`mailto:${company.email}`} className="font-medium text-brand-700 hover:text-brand-900">
-                {company.email}
-              </a>
-            </p>
-            <p>Hours: {company.hours}</p>
-          </div>
-        </div>
-
-        <div className="surface-card bg-slate-950 text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-100">Quick actions</p>
-          <div className="mt-6 space-y-4">
-            <a href="tel:+16124607639" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10">
-              <span>Call Nimbus</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a href={`mailto:${company.email}`} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10">
-              <span>Email the team</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <Link href="/services" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10">
-              <span>Explore services</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
+      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(17rem,0.8fr)]">
+        <ContactForm />
+        <aside className="border-t border-slate-200 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <p className="section-kicker">Contact Nimbus</p>
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">Start with a note.</h2>
+          <p className="mt-3 text-slate-600">Share the service area and the kind of support you are looking for. The team can follow up by email.</p>
+          <a href="mailto:contactus@nimbustechllc.com" className="mt-6 inline-block break-all font-semibold text-brand-700 underline decoration-brand-200 underline-offset-4 hover:text-brand-900">
+            {company.email}
+          </a>
+        </aside>
       </div>
     </div>
   );

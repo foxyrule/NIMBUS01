@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Fantasy Sports and Talent Scouting',
+  description: 'Explore Nimbus fantasy sports and sports talent scouting service areas.',
+};
 
 const focusAreas = [
   'Support for sports-driven initiatives and strategic opportunities',
@@ -16,6 +22,7 @@ export default function SportsTalentPage() {
         eyebrow="Fantasy Sports / Talent Scouting"
         title="A specialized service area built around opportunity, evaluation, and execution."
         description="Nimbus incorporates this domain as part of its broader business portfolio, bringing a disciplined and professional approach to sports-focused and talent-driven programs."
+        level={1}
       />
 
       <div className="relative mt-10 aspect-[16/8] overflow-hidden bg-slate-900">
@@ -31,7 +38,7 @@ export default function SportsTalentPage() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_14px_32px_rgba(15,23,42,0.05)]">
+      <div className="mt-16 border-t border-slate-200 py-8">
         <p className="section-kicker">Strategic lens</p>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-700">
           This part of the Nimbus portfolio reflects a focused, opportunity-driven model that requires both insight and execution. It fits within the broader company mission of delivering practical business value across multiple service lines.

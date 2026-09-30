@@ -1,7 +1,13 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { ServiceCard } from '@/components/ui/ServiceCard';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Services',
+  description: 'Explore Nimbus managed IT, RALICARE healthcare records management, real estate, fantasy sports, and talent scouting services.',
+};
 
 const services = [
   {
@@ -45,36 +51,42 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Professional solutions built for real business demands."
         description="Nimbus supports multiple business functions through a consistent model that values trust, execution, and practical outcomes."
+        level={1}
       />
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {services.map((service) => (
-          <ServiceCard
-            key={service.href}
-            eyebrow={service.eyebrow}
-            title={service.name}
-            description={service.summary}
-            href={service.href}
-            image={service.image}
-            imageAlt={service.imageAlt}
-          />
+      <div className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
+        {services.map((service, index) => (
+          <article key={service.name} className="grid items-center gap-6 py-7 md:grid-cols-[4rem_minmax(0,1fr)_minmax(17rem,0.8fr)] md:gap-8 md:py-8">
+            <p className="font-mono text-sm text-brand-700">0{index + 1}</p>
+            <div>
+              <p className="section-kicker">{service.eyebrow}</p>
+              <h2 className="mt-2 text-2xl font-semibold leading-tight text-slate-950">{service.name}</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">{service.summary}</p>
+              <Link href={service.href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900 hover:underline underline-offset-4">
+                Explore service <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+              <Image src={service.image} alt={service.imageAlt} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+            </div>
+          </article>
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_14px_32px_rgba(15,23,42,0.05)]">
-        <p className="section-kicker">Why clients choose Nimbus</p>
+      <div className="mt-16 border-t border-slate-200 pt-8">
+        <p className="section-kicker">Service approach</p>
         <div className="mt-5 grid gap-6 md:grid-cols-3">
-          <div>
-            <h3 className="text-xl font-semibold text-slate-950">Adaptable support</h3>
-            <p className="mt-3 text-slate-600">A flexible service model that can support multiple business needs without losing focus.</p>
+          <div className="border-l-2 border-brand-500 pl-5">
+            <h3 className="text-lg font-semibold text-slate-950">Adaptable support</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">A flexible service model that can support multiple business needs without losing focus.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold text-slate-950">Operational clarity</h3>
-            <p className="mt-3 text-slate-600">Service design that keeps teams aligned around practical priorities and reliable execution.</p>
+          <div className="border-l-2 border-brand-500 pl-5">
+            <h3 className="text-lg font-semibold text-slate-950">Operational clarity</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Service design that keeps teams aligned around practical priorities and reliable execution.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold text-slate-950">Professional delivery</h3>
-            <p className="mt-3 text-slate-600">A premium presentation designed to build confidence with clients, partners, and prospects.</p>
+          <div className="border-l-2 border-brand-500 pl-5">
+            <h3 className="text-lg font-semibold text-slate-950">Professional delivery</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">A business-focused approach centered on communication and follow-through.</p>
           </div>
         </div>
       </div>

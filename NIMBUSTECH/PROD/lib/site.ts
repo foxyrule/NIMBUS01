@@ -1,9 +1,6 @@
 export const company = {
   name: 'Nimbus Technologies & Services LLC',
-  address: '13055 Riverdale Dr NW #500\nCoon Rapids, MN 55448',
-  phone: '(612) 460-7639',
   email: 'contactus@nimbustechllc.com',
-  hours: 'Monday – Friday 9 AM – 5 PM',
 };
 
 export const primaryNav = [

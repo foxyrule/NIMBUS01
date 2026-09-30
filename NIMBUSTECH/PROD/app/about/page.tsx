@@ -1,4 +1,10 @@
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Learn about Nimbus Technologies & Services LLC and its work across technology, healthcare records, real estate, sports, and talent services.',
+};
 
 const principles = [
   {
@@ -22,6 +28,7 @@ export default function AboutPage() {
         eyebrow="About"
         title="Nimbus brings multiple service disciplines together under one professional brand."
         description="The company operates as a modern business services organization with a clear focus on technology support, records and information workflows, property-related services, and specialized programs in sports and talent."
+        level={1}
       />
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">

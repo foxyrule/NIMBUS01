@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Real Estate Services',
+  description: 'Explore Nimbus real estate services and its property-centered focus on support, coordination, and client communication.',
+};
 
 const areas = [
   'Property-centered operational coordination and communication',
@@ -16,6 +22,7 @@ export default function RealEstatePage() {
         eyebrow="Real Estate Services"
         title="Professional support in a service area that depends on clarity and trust."
         description="Nimbus’s real estate work reflects a practical, client-first approach that values accuracy, communication, and smooth coordination across property-focused needs."
+        level={1}
       />
 
       <div className="relative mt-10 aspect-[16/8] overflow-hidden bg-slate-900">
@@ -31,7 +38,7 @@ export default function RealEstatePage() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_14px_32px_rgba(15,23,42,0.05)]">
+      <div className="mt-16 border-t border-slate-200 py-8">
         <p className="section-kicker">Purpose</p>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-700">
           Real estate services benefit from a business model that keeps clients informed, organized, and supported at every stage. Nimbus approaches this work with the same professionalism and emphasis on execution that defines the broader company.

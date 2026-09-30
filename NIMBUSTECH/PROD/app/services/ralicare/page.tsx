@@ -2,6 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RALICARE Healthcare Records Management',
+  description: 'Learn about Nimbus RALICARE healthcare records management and its focus on structured documentation workflows.',
+};
 
 const points = [
   'Highly organized records and information management workflows',
@@ -16,6 +22,7 @@ export default function RalicarePage() {
         eyebrow="RALICARE / Healthcare Records Management"
         title="Structured records support for high-stakes operational environments."
         description="This service area reflects Nimbus’s focus on record integrity, clear documentation, and business processes that require a disciplined and dependable approach."
+        level={1}
       />
 
       <div className="relative mt-10 aspect-[16/8] overflow-hidden bg-slate-900">
@@ -31,7 +38,7 @@ export default function RalicarePage() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_14px_32px_rgba(15,23,42,0.05)]">
+      <div className="mt-16 border-t border-slate-200 py-8">
         <p className="section-kicker">What this supports</p>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-700">
           The RALICARE service line aligns with professional records management principles, workflow clarity, and a structured operating model that helps organizations manage information responsibly and consistently.

@@ -14,7 +14,7 @@ export function ServiceCard({ eyebrow, title, description, href, image, imageAlt
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-md border border-slate-200 bg-white p-6 shadow-[0_12px_30px_rgba(15,23,42,0.05)] transition duration-200 hover:-translate-y-1 hover:border-brand-500 hover:shadow-[0_18px_36px_rgba(23,61,122,0.12)]"
+      className="group flex h-full flex-col overflow-hidden rounded-sm border border-slate-200 bg-white p-6 transition-colors duration-200 hover:border-brand-500"
     >
       {image ? (
         <div className="relative -mx-6 -mt-6 mb-6 aspect-[16/9] overflow-hidden bg-slate-100">

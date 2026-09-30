@@ -1,6 +1,12 @@
 import Link from 'next/link';
 
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Resources',
+  description: 'Browse Nimbus service overviews and credited third-party articles from the original resources area.',
+};
 
 const resources = [
   {
@@ -47,11 +53,12 @@ export default function ResourcesPage() {
         eyebrow="Resources"
         title="A practical overview of Nimbus service areas."
         description="This section is designed to present the company’s key capabilities in a clean, usable, business-focused format without inventing unsupported claims."
+        level={1}
       />
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {resources.map((resource) => (
-          <Link key={resource.title} href={resource.href} className="surface-card transition hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
+          <Link key={resource.title} href={resource.href} className="surface-card transition hover:border-brand-500">
             <p className="section-kicker">Resource</p>
             <h3 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950">{resource.title}</h3>
             <p className="mt-4 text-slate-600">{resource.copy}</p>
@@ -69,7 +76,7 @@ export default function ResourcesPage() {
         <p className="mt-3 max-w-3xl text-slate-600">These links were present on Nimbus’s original website. Third-party pieces are credited here and open at their original Nimbus-hosted pages so authorship and source context remain visible.</p>
         <div className="mt-7 grid gap-5 md:grid-cols-2">
           {articles.map((article) => (
-            <article key={article.title} className="border-l-2 border-brand-700 bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+            <article key={article.title} className="border-l-2 border-brand-700 bg-white p-6">
               <h3 className="text-xl font-semibold text-slate-950">{article.title}</h3>
               <p className="mt-3 text-sm font-medium text-slate-700">{article.credit}</p>
               <p className="mt-2 text-sm leading-6 text-slate-600">{article.note}</p>

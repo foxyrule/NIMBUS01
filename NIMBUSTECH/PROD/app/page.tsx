@@ -1,9 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { HeroRotator } from '@/components/ui/HeroRotator';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { ServiceCard } from '@/components/ui/ServiceCard';
-import { company } from '@/lib/site';
 
 const serviceHighlights = [
   {
@@ -56,9 +55,9 @@ const differencePillars = [
 ];
 
 const processSteps = [
-  'Clarify the challenge or opportunity.',
-  'Map the right operational strategy and service fit.',
-  'Deliver consistent support and measurable progress.',
+  { title: 'Understand the need', text: 'Clarify the challenge, operating context, and service area.' },
+  { title: 'Define the approach', text: 'Map the right support model and practical next steps.' },
+  { title: 'Deliver the work', text: 'Stay accountable to the plan with consistent communication.' },
 ];
 
 export default function HomePage() {
@@ -66,97 +65,71 @@ export default function HomePage() {
     <div className="pb-16">
       <HeroRotator />
 
-      <section className="container-shell py-12">
-        <SectionHeading
-          eyebrow="What Nimbus delivers"
-          title="A professional, cross-functional service model."
-          description="The company combines practical technology support with business-facing services that help clients stay organized, responsive, and ready for growth."
-        />
+      <section className="container-shell grid gap-8 py-16 md:grid-cols-[0.7fr_1.3fr] md:py-20">
+        <p className="section-kicker">Nimbus at a glance</p>
+        <div>
+          <h2 className="max-w-3xl text-3xl font-semibold leading-tight text-slate-950 sm:text-4xl">One company. A considered mix of technology and business services.</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Nimbus Technologies &amp; Services LLC works across managed IT, healthcare records management, real estate, fantasy sports, and talent scouting. Each service is presented with a practical focus on reliable operations and clear communication.</p>
+        </div>
       </section>
 
-      <section className="bg-slate-950 py-16 text-white">
+      <section className="border-y border-slate-200 bg-white py-16 sm:py-20">
         <div className="container-shell">
           <SectionHeading
             eyebrow="Service lines"
-            title="Built around the work that matters most."
-            dark
-            description="From managed IT support to healthcare records and specialized business programs, Nimbus continues to work across the service areas that define its real-world scope."
+            title="Focused capabilities, grounded in real work."
+            description="Explore the established service areas in the Nimbus portfolio."
           />
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {serviceHighlights.map((service) => (
-              <ServiceCard
-                key={service.href}
-                eyebrow={service.eyebrow}
-                title={service.title}
-                description={service.description}
-                href={service.href}
-                image={service.image}
-                imageAlt={service.imageAlt}
-              />
+          <div className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
+            {serviceHighlights.map((service, index) => (
+              <article key={service.title} className="grid items-center gap-6 py-7 md:grid-cols-[5rem_minmax(0,0.9fr)_minmax(16rem,0.8fr)] md:gap-9 md:py-8">
+                <p className="font-mono text-sm text-brand-700">0{index + 1}</p>
+                <div>
+                  <p className="section-kicker">{service.eyebrow}</p>
+                  <h3 className="mt-2 text-2xl font-semibold leading-tight text-slate-950">{service.title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">{service.description}</p>
+                  <Link href={service.href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900 hover:underline underline-offset-4">
+                    View service <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                  <Image src={service.image} alt={service.imageAlt} fill loading={index === 1 ? 'eager' : 'lazy'} sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="container-shell py-16">
-        <SectionHeading
-          eyebrow="Why Nimbus"
-          title="Trustworthy support for complex, operational work."
-          description="The company’s strength is not a single service line—it is the blend of practical execution, communication, and adaptability across multiple business demands."
-        />
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {differencePillars.map((item, index) => (
-            <div key={item.title} className="surface-card">
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-sm font-bold text-brand-700">
-                0{index + 1}
-              </div>
-              <h3 className="text-xl font-semibold tracking-tight text-slate-950">{item.title}</h3>
-              <p className="mt-4 text-slate-600">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-brand-50 py-16">
+      <section className="bg-[#0b1220] py-16 text-white sm:py-20">
         <div className="container-shell">
           <SectionHeading
-            eyebrow="How it works"
-            title="A clear and practical engagement model."
+            eyebrow="How Nimbus works"
+            title="A straightforward way to move from need to delivery."
+            dark
           />
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-8 border-t border-white/20 pt-7 md:grid-cols-3 md:gap-10">
             {processSteps.map((step, index) => (
-              <div key={step} className="surface-card bg-white">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-semibold text-white">
-                  {index + 1}
-                </div>
-                <p className="text-lg font-medium text-slate-900">{step}</p>
+              <div key={step.title}>
+                <p className="font-mono text-sm text-cyan-300">0{index + 1}</p>
+                <h3 className="mt-4 text-xl font-semibold text-white">{step.title}</h3>
+                <p className="mt-2 max-w-sm text-sm leading-6 text-slate-300">{step.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="container-shell py-16">
-        <div className="rounded-[2rem] bg-gradient-to-r from-brand-700 via-brand-900 to-slate-950 p-8 text-white shadow-[0_20px_60px_rgba(15,35,70,0.24)] sm:p-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-100">Ready to connect?</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Let’s discuss the right support model for your business.</h2>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100">
-                Contact Nimbus
-              </Link>
-              <a href={`tel:${company.phone.replace(/[^\d+]/g, '')}`} className="rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/5">
-                {company.phone}
-              </a>
-            </div>
-          </div>
+      <section className="container-shell grid gap-6 py-16 sm:grid-cols-[1fr_auto] sm:items-center sm:py-20">
+        <div>
+          <p className="section-kicker">Start a conversation</p>
+          <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-slate-950">Let’s discuss the right support for your organization.</h2>
         </div>
+        <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-brand-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-900">
+          Contact Nimbus <span aria-hidden="true">→</span>
+        </Link>
       </section>
     </div>
   );
