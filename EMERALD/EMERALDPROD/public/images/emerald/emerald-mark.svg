@@ -1,0 +1,19 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="emeraldMarkGrad" x1="34" y1="28" x2="198" y2="182" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="0.55" stop-color="#10B981"/>
+      <stop offset="1" stop-color="#1F7A5C"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="232" height="232" rx="62" fill="#0B1725"/>
+  <path d="M72 72L128 42L184 72V145L128 175L72 145V72Z" stroke="url(#emeraldMarkGrad)" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M92 148L112 120L128 136L164 84" stroke="#E8FFF7" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M92 84H164" stroke="#E8FFF7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M92 176H164" stroke="#E8FFF7" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="92" cy="148" r="10" fill="#E8FFF7"/>
+  <circle cx="112" cy="120" r="10" fill="#E8FFF7"/>
+  <circle cx="128" cy="136" r="10" fill="#E8FFF7"/>
+  <circle cx="164" cy="84" r="10" fill="#E8FFF7"/>
+  <circle cx="128" cy="176" r="10" fill="#E8FFF7"/>
+</svg>

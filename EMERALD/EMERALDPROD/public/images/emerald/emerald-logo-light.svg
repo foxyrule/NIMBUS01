@@ -1,0 +1,27 @@
+<svg width="640" height="180" viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="emeraldGradLight" x1="26" y1="20" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34D399"/>
+      <stop offset="0.5" stop-color="#6EE7B7"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(18 18)">
+    <rect x="0" y="0" width="120" height="120" rx="30" fill="#E8FFF7"/>
+    <path d="M30 28L60 12L90 28V76L60 92L30 76V28Z" stroke="url(#emeraldGradLight)" stroke-width="5.6" stroke-linejoin="round"/>
+    <path d="M39 74L51 58L60 66L79 42" stroke="#0F172A" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M44 36H76" stroke="#0F172A" stroke-width="5.6" stroke-linecap="round"/>
+    <path d="M40 90H80" stroke="#0F172A" stroke-width="5.6" stroke-linecap="round"/>
+    <circle cx="39" cy="74" r="5" fill="#0F172A"/>
+    <circle cx="51" cy="58" r="5" fill="#0F172A"/>
+    <circle cx="60" cy="66" r="5" fill="#0F172A"/>
+    <circle cx="79" cy="42" r="5" fill="#0F172A"/>
+    <circle cx="60" cy="92" r="5" fill="#0F172A"/>
+  </g>
+
+  <g transform="translate(170 40)">
+    <text x="0" y="48" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="34" letter-spacing="2.5" fill="#F8FAFC">EMERALD</text>
+    <text x="3" y="82" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="16" letter-spacing="2.8" fill="#DCFCE7">TECHNOLOGIES &amp; SERVICES LIMITED</text>
+  </g>
+</svg>
