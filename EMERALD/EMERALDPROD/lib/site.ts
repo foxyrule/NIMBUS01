@@ -16,7 +16,5 @@ export const siteConfig = {
     line2: "Efab Queens Estate,",
     line3: "Karsana, Gwarinpa, Abuja, Nigeria",
   },
-  contactEmail: "foxyrule@gmail.com",
-  inquiryEmail: "sswfo0410@gmail.com",
   socialLinks: [],
 } as const;

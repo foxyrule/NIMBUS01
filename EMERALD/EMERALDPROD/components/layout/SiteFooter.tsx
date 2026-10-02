@@ -53,11 +53,6 @@ export function SiteFooter() {
               <li>{siteConfig.address.line1}</li>
               <li>{siteConfig.address.line2}</li>
               <li>{siteConfig.address.line3}</li>
-              <li>
-                <a href={`mailto:${siteConfig.contactEmail}`} className="transition hover:text-white">
-                  {siteConfig.contactEmail}
-                </a>
-              </li>
             </ul>
           </div>
         </div>

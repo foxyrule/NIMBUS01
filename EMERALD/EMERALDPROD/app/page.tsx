@@ -181,12 +181,6 @@ export default function HomePage() {
               <p>
                 <span className="font-semibold text-slate-900">Address:</span> {siteConfig.address.line1} {siteConfig.address.line2} {siteConfig.address.line3}
               </p>
-              <p>
-                <span className="font-semibold text-slate-900">Email:</span>{" "}
-                <a href={`mailto:${siteConfig.contactEmail}`} className="text-emerald-700 hover:text-emerald-800">
-                  {siteConfig.contactEmail}
-                </a>
-              </p>
             </div>
           </div>
 

@@ -30,11 +30,6 @@ export default function ContactPage() {
             <p>{siteConfig.address.line1}</p>
             <p>{siteConfig.address.line2}</p>
             <p>{siteConfig.address.line3}</p>
-            <p>
-              <a href={`mailto:${siteConfig.contactEmail}`} className="text-emerald-700 hover:text-emerald-800">
-                {siteConfig.contactEmail}
-              </a>
-            </p>
           </div>
         </div>
 
