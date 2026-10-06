@@ -17,12 +17,35 @@ const serviceDelivery = [
 ];
 
 const clients = [
-  "Private entities",
-  "Government entities",
-  "SMEs",
-  "Local and multinational organizations",
-  "Charity organizations",
-  "Private individuals",
+  {
+    name: "Adebola College, Ilorin, Nigeria",
+    url: "https://www.adebolacollege.org",
+    description: "Adebola College, founded in 2005, is a coeducational private school based in Ilorin, Nigeria.",
+  },
+  {
+    name: "O G Oyeleke LLP",
+    url: "https://www.ogoyelekelaw.com",
+    description: "Private law firm based in Lagos, Nigeria.",
+  },
+  {
+    name: "West Africa Inspection Services Limited",
+    url: "https://www.westafrica-inspections.com",
+    description: "A leading marine survey and inspection service provider based in Lagos, Nigeria.",
+  },
+  {
+    name: "Medvet Hotels",
+    url: "https://www.medvethotels.com",
+    description: "Hotel and hospitality services.",
+  },
+  {
+    name: "Caraburo Consulting",
+    url: "https://www.caraburo.com",
+    description: "An IT consulting firm in Minneapolis, Minnesota.",
+  },
+  {
+    name: "Controls West Africa SA Limited",
+    description: "Controls West Africa SA Limited is a private limited liability company based in Lagos, Nigeria.",
+  },
 ];
 
 const testimonials = [
@@ -142,10 +165,17 @@ export default function HomePage() {
         />
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {clients.map((item) => (
-            <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-base font-medium text-slate-700">
-              {item}
-            </div>
+          {clients.map((client) => (
+            <article key={client.name} className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+              {client.url ? (
+                <a href={client.url} target="_blank" rel="noreferrer" className="block text-base font-medium text-emerald-700 transition hover:text-emerald-800">
+                  {client.name}
+                </a>
+              ) : (
+                <span className="block text-base font-medium text-slate-700">{client.name}</span>
+              )}
+              <p className="mt-2 text-sm leading-6 text-slate-600">{client.description}</p>
+            </article>
           ))}
         </div>
       </section>
