@@ -71,7 +71,7 @@ const clients = [
     name: "Adebola College, Ilorin, Nigeria",
     url: "https://www.adebolacollege.org",
     description: "Adebola College, founded in 2005, is a coeducational private school based in Ilorin, Nigeria.",
-    logo: "/images/emerald/Adebola College.png",
+    logo: "/images/emerald/adebola college.png",
   },
   {
     name: "O G Oyeleke LLP",
@@ -83,7 +83,7 @@ const clients = [
     name: "West Africa Inspection Services Limited",
     url: "https://www.westafrica-inspections.com",
     description: "A leading marine survey and inspection service provider based in Lagos, Nigeria.",
-    logo: "/images/emerald/West Africa Inspection Services Limited.png",
+    logo: "/images/emerald/West africa Inspection services limited.png",
   },
   {
     name: "Medvet Hotels",
