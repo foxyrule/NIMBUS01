@@ -7,6 +7,7 @@ export const primaryNav = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
+  { href: '/it-partners', label: 'IT Partners' },
   { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact Us' },
 ];
