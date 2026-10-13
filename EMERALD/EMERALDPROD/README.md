@@ -40,19 +40,22 @@ npm run typecheck
 
 The contact form is configured for production use with environment variables. The app reads these values server-side and does not expose SMTP credentials in frontend code.
 
-Required environment variables:
+Required server-side environment variables:
 
 ```env
 CONTACT_TO_FOXY=foxyrule@gmail.com
 CONTACT_TO_SSWFO=sswfo0410@gmail.com
-SMTP_HOST=
+CONTACT_TO_EMERALD=contactus@emeraldtechsvcs.com
+SMTP_HOST=smtp.example.com
 SMTP_PORT=587
-SMTP_USER=
-SMTP_PASS=
-SMTP_FROM=
+SMTP_USER=your-smtp-username
+SMTP_PASS=your-smtp-password
+SMTP_FROM=do-not-reply@emeraldtechsvcs.com
 ```
 
-If SMTP variables are not configured in the local environment, the API still validates submissions correctly but will not deliver email until the server-side mail configuration is provided.
+`CONTACT_TO_FOXY`, `CONTACT_TO_SSWFO`, and `CONTACT_TO_EMERALD` are all required recipients. `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASS` must be supplied by the SMTP provider. `SMTP_PORT` defaults to `587`; use port `465` for implicit TLS. `SMTP_FROM` is optional and defaults to `do-not-reply@emeraldtechsvcs.com`.
+
+Set these variables in the local, untracked `.env.local` file and in the Vercel project's server-side Environment Variables for every deployed environment that should send contact email. Do not use `NEXT_PUBLIC_` prefixes or commit SMTP credentials. If the recipient or SMTP configuration is missing or invalid, the API returns an error instead of reporting success. A successful response means the SMTP service accepted the message for the configured recipients; it cannot guarantee final inbox delivery.
 
 ## Production notes
 

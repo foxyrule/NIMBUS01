@@ -11,7 +11,7 @@ The Nimbus website is a responsive corporate site for Nimbus Technologies & Serv
 - **ESLint 9.30.1** and `eslint-config-next` provide code-quality checks using the flat configuration in `eslint.config.mjs`.
 - **Node.js and npm** install dependencies and run the project scripts. Use a current Node.js version compatible with Next.js 16.
 
-The site includes a server-side contact endpoint. Contact messages are validated and sent to both `foxyrule@gmail.com` and `contactus@nimbustechllc.com` through Resend. The Resources page links to original Nimbus-hosted pages for the credited third-party articles.
+The site includes a server-side contact endpoint. Contact messages are validated and sent to the configured Nimbus recipients through the Resend API. The Resources page links to original Nimbus-hosted pages for the credited third-party articles.
 
 ## Run Locally
 
@@ -29,7 +29,18 @@ npm run dev
 
 Open the URL printed by Next.js, usually `http://localhost:3000`.
 
-To enable contact-form delivery, copy `.env.example` to `.env.local`, set `RESEND_API_KEY`, and set `CONTACT_FROM_EMAIL` to a sender address verified with Resend. The sender address is used only by the server; never expose the API key in client-side code.
+To enable contact-form delivery, copy `.env.example` to `.env.local` and set these server-side environment variables:
+
+```env
+RESEND_API_KEY=re_your_resend_api_key
+CONTACT_FROM_EMAIL=Nimbus Website <website@your-verified-domain.com>
+CONTACT_TO_FOXY=foxyrule@gmail.com
+CONTACT_TO_NIMBUS=contactus@nimbustechllc.com
+```
+
+`RESEND_API_KEY` is the secret API key from Resend. `CONTACT_FROM_EMAIL` must be an address (optionally with a display name) verified with Resend. `CONTACT_TO_FOXY` and `CONTACT_TO_NIMBUS` configure the two required recipients. Add all four values in the Nimbus Vercel project's server-side Environment Variables for each environment that should send contact mail. Do not use `NEXT_PUBLIC_` prefixes or commit `.env.local` or real credentials.
+
+Nimbus currently sends mail through Resend's HTTPS API; it does not use Nodemailer or SMTP, so SMTP environment variables are not required. If any required configuration is missing or invalid, or if Resend rejects the request, the API returns an error instead of reporting success. A successful response means Resend accepted the message for processing; it does not guarantee final inbox delivery.
 
 Available verification and production commands:
 
@@ -69,7 +80,7 @@ Reusable UI and layout components live in `components/`:
 - `components/ui/HeroRotator.tsx` rotates among five service highlights, with timed progression, manual controls, and links to the corresponding service pages.
 - `components/ui/ServiceCard.tsx` and `SectionHeading.tsx` keep common page elements consistent.
 
-`components/ui/ContactForm.tsx` provides client-side validation, the live character counter, and submission feedback. `app/api/contact/route.ts` validates submissions on the server and sends them to both required email recipients through Resend.
+`components/ui/ContactForm.tsx` provides browser validation, the live character counter, duplicate-submit protection, and submission feedback. `app/api/contact/route.ts` validates submissions on the server and sends them to the configured recipients through Resend.
 
 `lib/site.ts` is the shared source for the approved company email and primary navigation. The retired phone number and street address are not used by the site.
 

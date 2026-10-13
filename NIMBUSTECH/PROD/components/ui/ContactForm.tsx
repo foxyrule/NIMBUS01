@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 
 const messageLimit = 400;
 
@@ -8,9 +8,12 @@ export function ContactForm() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
+  const submissionInProgress = useRef(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionInProgress.current) return;
+    submissionInProgress.current = true;
     setStatus('sending');
     setFeedback('');
 
@@ -43,6 +46,8 @@ export function ContactForm() {
     } catch (error) {
       setStatus('error');
       setFeedback(error instanceof Error ? error.message : 'Your message could not be sent. Please try again.');
+    } finally {
+      submissionInProgress.current = false;
     }
   }
 

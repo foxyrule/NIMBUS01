@@ -1,6 +1,6 @@
-const recipients = ['foxyrule@gmail.com', 'contactus@nimbustechllc.com'];
 const messageLimit = 400;
 const requestLimit = 8192;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const allowedServices = new Set([
   'Managed IT Services',
   'RALICARE / Healthcare Records Management',
@@ -20,6 +20,20 @@ type ContactPayload = {
 
 function invalid(message: string, status = 400) {
   return Response.json({ message }, { status });
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+
+    return entities[character];
+  });
 }
 
 export async function POST(request: Request) {
@@ -65,7 +79,7 @@ export async function POST(request: Request) {
   const message = typeof payload.message === 'string' ? payload.message : '';
 
   if (!name || name.length > 100) return invalid('Enter a name using no more than 100 characters.');
-  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!email || email.length > 254 || !emailPattern.test(email)) {
     return invalid('Enter a valid email address.');
   }
   if (!subject || subject.length > 150 || /[\r\n]/.test(subject)) {
@@ -75,10 +89,23 @@ export async function POST(request: Request) {
   if (message.length > messageLimit) return invalid(`Messages must be ${messageLimit} characters or fewer.`);
   if (service && !allowedServices.has(service)) return invalid('The selected service area is not valid.');
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !from) {
-    console.error('Contact delivery is not configured. Set RESEND_API_KEY and CONTACT_FROM_EMAIL.');
+  const recipients = [
+    process.env.CONTACT_TO_FOXY?.trim() ?? '',
+    process.env.CONTACT_TO_NIMBUS?.trim() ?? '',
+  ];
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const from = process.env.CONTACT_FROM_EMAIL?.trim();
+  const senderAddress = from?.match(/<([^<>]+)>$/)?.[1] ?? from ?? '';
+
+  if (
+    recipients.some((recipient) => !emailPattern.test(recipient)) ||
+    !apiKey ||
+    !from ||
+    !emailPattern.test(senderAddress)
+  ) {
+    console.error(
+      'Contact delivery is not configured. Set valid CONTACT_TO_FOXY, CONTACT_TO_NIMBUS, RESEND_API_KEY, and CONTACT_FROM_EMAIL values.',
+    );
     return invalid('The contact service is temporarily unavailable. Please email Nimbus directly.', 503);
   }
 
@@ -95,11 +122,33 @@ export async function POST(request: Request) {
         reply_to: email,
         subject: `Nimbus website inquiry: ${subject}`,
         text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nService area: ${service || 'Not specified'}\n\n${message}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #0f172a;">
+            <h2>New Nimbus website inquiry</h2>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+            <p><strong>Service area:</strong> ${escapeHtml(service || 'Not specified')}</p>
+            <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
+          </div>
+        `,
       }),
     });
 
     if (!delivery.ok) {
       console.error('Contact delivery provider returned an error:', delivery.status);
+      return invalid('Your message could not be delivered right now. Please try again later.', 502);
+    }
+
+    const result: unknown = await delivery.json();
+    if (
+      !result ||
+      typeof result !== 'object' ||
+      !('id' in result) ||
+      typeof result.id !== 'string' ||
+      !result.id.trim()
+    ) {
+      console.error('Contact delivery provider returned an invalid success response.');
       return invalid('Your message could not be delivered right now. Please try again later.', 502);
     }
   } catch (error) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useRef, useState } from "react";
 
 const MAX_MESSAGE_LENGTH = 400;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,6 +15,7 @@ export function ContactForm() {
   });
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submissionInProgress = useRef(false);
 
   const remaining = useMemo(
     () => MAX_MESSAGE_LENGTH - formData.message.length,
@@ -28,6 +29,7 @@ export function ContactForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submissionInProgress.current) return;
     setStatus(null);
 
     const payload = {
@@ -56,6 +58,7 @@ export function ContactForm() {
       return;
     }
 
+    submissionInProgress.current = true;
     setIsSubmitting(true);
 
     try {
@@ -82,6 +85,7 @@ export function ContactForm() {
       const message = error instanceof Error ? error.message : "Unable to submit the message right now.";
       setStatus({ type: "error", message });
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   };
